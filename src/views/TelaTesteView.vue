@@ -8,7 +8,12 @@ export default {
         "Jhonatta",
         "Francisco",
         "Daniel"
-      ]
+      ],
+      listaDeComponentesEmTela: [
+        'meu-componente-component',
+        'MeuSegundoComponenteComponent'
+      ],
+      variavelDoMixin: "Já existe!"
     }
   },
   computed: {
@@ -45,7 +50,7 @@ export default {
         "Emanuel"
       ]
       listaDePessoas.forEach((pessoa, i) => {
-        console.log(pessoa)
+        // console.log(pessoa)
       })
     },
     metodoParaDefinirCor(parametro) {
@@ -57,24 +62,30 @@ export default {
     },
     metodoClickBotao($event) {
       alert("O botão foi clicado!");
-      console.log($event)
+      // console.log($event)
     },
     metodoObterTecla($event) {
-      console.log($event.key)
+      // console.log($event.key)
+    },
+    mostrarValorEmitido($event) {
+      console.log($event);
+    },
+    mostrarValorEmitidoDiferente($event) {
+      console.log("Valor Emitido:", $event)
     }
   },
   beforeMount() {
-    console.log("A tela foi quase montada!");
+    // console.log("A tela foi quase montada!");
   },
   mounted() {
-    console.log("A tela foi montada!");
+    // console.log("A tela foi montada!");
     this.meuMetodoFor();
   },
   beforeDestroy() {
-    console.log("A tela foi quase destruida!");
+    // console.log("A tela foi quase destruida!");
   },
   destroyed() {
-    console.log("A tela foi destruida!");
+    // console.log("A tela foi destruida!");
   },
   beforeRouteLeave(to, from, next) {
     next();
@@ -84,7 +95,39 @@ export default {
 
 <template>
   <div>
-    <div>
+    <!-- <meu-componente-component v-model="segundaVariavel">
+      <div slot="footer">
+        Conteudo do Footer
+      </div>
+      <div slot="header">
+        Conteudo do Header
+      </div>
+      conteudo fora do slot
+    </meu-componente-component> -->
+
+    {{ $data.$variavelDoMixin }}
+    {{ $data.$segundaVariavelDoMixin }}
+
+    {{ $metodoDoMixin() }}
+
+    <component v-for="component in listaDeComponentesEmTela" :is="component" :variavelDoComponente="'Valor Passado pelo componente dinâmico'">
+      <div slot="footer">
+        Conteudo do Footer
+      </div>
+      <div slot="header">
+        Conteudo do Header
+      </div>
+      conteudo fora do slot
+    </component>
+
+    <!-- <div>
+      O valor da variável fora do componente é: {{ segundaVariavel }}
+    </div> -->
+    <!-- <MeuComponenteComponent
+      :variavelDoComponente="primeiraVariavel"
+      @ValorEmitido="mostrarValorEmitidoDiferente($event)"
+    ></MeuComponenteComponent> -->
+    <!-- <div v-primeiraDiretiva="'String qualquer'">
       Minha Primeira Rota
     </div>
     <div>
@@ -120,11 +163,7 @@ export default {
     <br>
     <form>
       <button @click.prevent.submit="metodoClickBotao($event)">Botão Teste</button>
-    </form>
-    <input v-model="segundaVariavel"/>
-    <div>
-      O valor da segunda variável é: {{ segundaVariavel }}
-    </div>
+    </form> -->
   </div>
 </template>
 
