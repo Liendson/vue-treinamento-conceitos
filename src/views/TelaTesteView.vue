@@ -2,7 +2,7 @@
 export default {
   data: () => {
     return {
-      segundaVariavel: "Valor",
+      segundaVariavel: "STRING MAIOR",
       listaDePessoas: [
         "Jeofton",
         "Jhonatta",
@@ -72,6 +72,16 @@ export default {
     },
     mostrarValorEmitidoDiferente($event) {
       console.log("Valor Emitido:", $event)
+    },
+    realizarRequisicao() {
+      this.$axios().get("", {
+        params: {
+          results: 5,
+          gender: "female"
+        }
+      }).then(({ data }) => {
+        console.log(data.results);
+      })
     }
   },
   beforeMount() {
@@ -95,6 +105,10 @@ export default {
 
 <template>
   <div>
+    {{ segundaVariavel | letraMaiuscula(true) }}
+
+    <button @click="realizarRequisicao()">Clique aqui</button>
+
     <!-- <meu-componente-component v-model="segundaVariavel">
       <div slot="footer">
         Conteudo do Footer
@@ -105,12 +119,12 @@ export default {
       conteudo fora do slot
     </meu-componente-component> -->
 
-    {{ $data.$variavelDoMixin }}
+    <!-- {{ $data.$variavelDoMixin }}
     {{ $data.$segundaVariavelDoMixin }}
 
-    {{ $metodoDoMixin() }}
+    {{ $metodoDoMixin() }} -->
 
-    <component v-for="component in listaDeComponentesEmTela" :is="component" :variavelDoComponente="'Valor Passado pelo componente dinâmico'">
+    <!-- <component v-for="component in listaDeComponentesEmTela" :is="component" :variavelDoComponente="'Valor Passado pelo componente dinâmico'">
       <div slot="footer">
         Conteudo do Footer
       </div>
@@ -118,7 +132,7 @@ export default {
         Conteudo do Header
       </div>
       conteudo fora do slot
-    </component>
+    </component> -->
 
     <!-- <div>
       O valor da variável fora do componente é: {{ segundaVariavel }}
