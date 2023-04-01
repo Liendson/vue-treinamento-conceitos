@@ -82,6 +82,9 @@ export default {
       }).then(({ data }) => {
         console.log(data.results);
       })
+    },
+    mostrarMensagem() {
+      this.$swal('Hello Vue world!!!');
     }
   },
   beforeMount() {
@@ -108,6 +111,7 @@ export default {
     {{ segundaVariavel | letraMaiuscula(true) }}
 
     <button @click="realizarRequisicao()">Clique aqui</button>
+    <button @click="mostrarMensagem()">Clique aqui para mostrar a mensagem!</button>
 
     <!-- <meu-componente-component v-model="segundaVariavel">
       <div slot="footer">
